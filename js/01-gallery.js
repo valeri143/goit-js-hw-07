@@ -12,7 +12,7 @@ const markup =galleryItems.map(({preview, original, description}) =>
   />
 </a>
 </li>`);
-gallery.insertAdjacentHTML('beforeend', markup.join())
+gallery.insertAdjacentHTML('beforeend', markup.join(""))
 gallery.addEventListener('click', onCLick);
 function onCLick(event){
     event.preventDefault()
@@ -29,12 +29,17 @@ function onCLick(event){
         alt="${description}"
       />
     </a>
-    </li>`)
+    </li>`, {
+      onShow: (instance) => {return window.addEventListener('keydown', function onClose(event) {
+        if (event.key === "Escape") {
+         instance.close();
+        }
+    }   );},
+      onClose: (instance) => {return window.removeEventListener('keydown',function onClose(event) {
+        if (event.key === "Escape") {
+         instance.close();
+        }
+    }   )}
+    })
     instance.show()
 }
-window.addEventListener('keydown', onClose);
-function onClose(event) {
-    if (event.key === "Escape") {
-     instance.close();
-    }
-}   

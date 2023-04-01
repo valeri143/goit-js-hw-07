@@ -6,6 +6,5 @@ const markup = galleryItems.map(({preview, original, description}) => `<li class
    <img class="gallery__image" src="${preview}" alt="${description}" />
 </a>
 </li>`)
-gallery.insertAdjacentHTML("beforeend", markup)
+gallery.insertAdjacentHTML("beforeend", markup.join(""))
 const lightbox = new SimpleLightbox('.gallery a', { captionsData: "alt", captionDelay: 250 });
-console.log(galleryItems);
